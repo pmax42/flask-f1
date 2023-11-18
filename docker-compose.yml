@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  db:
+    image: mariadb:latest
+    container_name: mariadb-flask-app
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: f1db
+      MYSQL_USER: flask
+      MYSQL_PASSWORD: flask
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - 3306:3306
