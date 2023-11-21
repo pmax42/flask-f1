@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "F1 Font";
+        src: url(../fonts/Formula1-regular.ttf) format("truetype");
+    }
+}

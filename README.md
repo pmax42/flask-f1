@@ -6,8 +6,8 @@
 - VENV et installer les modules à l'aide du requirements.txt
 - Faire un npm install dans le projet
 - Executer le docker compose pour la bdd
-  - La premire fois, executer le dump (ensuite le mount de data permet la persistence)
-
+  - La premire fois, executer les dumps (ensuite le mount de data permet la persistence)
+- Penser à créer son fichier .env à partir du fichier exemple
 ## Start project
 
 - Execute main.py file
