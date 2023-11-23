@@ -9,14 +9,21 @@
     <body class="text-secondary bg-background font-custom">
         <header class="flex items-center px-8 bg-primary">
             <img class="w-32" src="{{ url_for('static', filename='images/f1-logo.png') }}" alt="My Formula One App">
+
             <nav class="w-full text-white text-lg">
                 <ul class="flex justify-evenly">
                     <li class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300"><a href="/">Home</a></li>
                     <li class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300"><a href="/">My teams</a></li>
                     <li class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300"><a href="/">Statistics</a></li>
-                    <li class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300"><a href="/">Sign Out</a></li>
+                    <li class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300"><a href="/">My account</a></li>
                 </ul>
             </nav>
+
+            {% if user.is_authenticated %}
+            <button class="min-w-fit text-xs text-white bg-secondary rounded-md px-3 py-2 hover:text-primary transition ease-in-out duration-300">
+                <a href="/logout">Log Out</a>
+            </button>
+            {% endif %}
 
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
