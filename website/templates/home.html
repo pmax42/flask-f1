@@ -3,18 +3,41 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
-<p class="text-xs italic">Click on a team for more information</p>
+<div class="ml-10">
+    <h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
+    <p class="text-xs italic mt-1">Click on a team for more information</p>
+</div>
 
-<ul class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
+<ul x-data="{ 
+        active: '',
+        setActive(id) {
+            console.log(id);
+            this.active = (this.active == id) ? '' : id;
+        }
+    }" class="flex flex-col items-center py-8 gap-2">
     {% for constructor in constructors %}
-        <li x-data="{ liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}') }" :class="liClass" class="bg-white p-4 rounded-md shadow-lg flex items-center gap-4 group border cursor-pointer transition-all">
-            <span x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass" class="select-none">{{ constructor.name }}</span>
-            <div class="flex items-center">
-                <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
-                <img class="pl-2 w-36 transform group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
-            </div>
+        <li x-data="{
+                id: 'li-' + '{{ constructor.constructorRef }}',
+                liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}')
+            }"
+            class="w-1/2 bg-white rounded shadow border transition"
+            :class="liClass">
+            <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group p-4">
+                <div class="flex items-center gap-4 select-none">
+                    <span x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass">{{ constructor.name }}</span>
+                    <div class="flex items-center">
+                        <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
+                        <img class="pl-2 w-36 transform transition group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
+                    </div>
+                </div>
+                <svg :class="{ 'rotate-180': active==id }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ease-in-out duration-200 group-hover:bg-gray-200 rounded-full p-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+            </header>
+            <main x-show="active==id" x-collapse x-cloak>
+                <div class="p-12">Card content</div>
+            </main>
         </li>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
