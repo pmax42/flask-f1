@@ -1,0 +1,10 @@
+{% macro textInput(label, form) %}
+    <!-- Transform label in snake case with helper function in helpers.py -->
+    {% with %}
+        {% set id = label|snake_case %}
+        <div class="flex flex-col space-y-2">
+            <label class="w-fit" for="{{ id }}">{{ label }}</label>
+            {{ form[id](class="border rounded-md p-2 text-sm focus:outline-primary") }}
+        </div>
+    {% endwith %}
+{% endmacro %}

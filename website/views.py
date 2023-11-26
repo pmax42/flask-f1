@@ -23,8 +23,7 @@ def profile():
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
-        # Print form data
-        print(form.data)
+        form.phone_number.data = current_user.phone_number
 
     if request.method == 'POST':
         if form.validate_on_submit():

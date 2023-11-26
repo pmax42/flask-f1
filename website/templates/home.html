@@ -22,7 +22,7 @@
             }"
             class="w-1/2 bg-white rounded shadow border transition"
             :class="liClass">
-            <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group p-4">
+            <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
                 <div class="flex items-center gap-4 select-none">
                     <span x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass">{{ constructor.name }}</span>
                     <div class="flex items-center">
