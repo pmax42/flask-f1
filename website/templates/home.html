@@ -3,6 +3,18 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>Hello, <span class="text-primary">{{ user.first_name }}</span>!</h1>
-    <p>Welcome to my Formula One App!</p>
+<h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
+<p class="text-xs italic">Click on a team for more information</p>
+
+<ul class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
+    {% for constructor in constructors %}
+        <li x-data="{ liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}') }" :class="liClass" class="bg-white p-4 rounded-md shadow-lg flex items-center gap-4 group border cursor-pointer transition-all">
+            <span x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass" class="select-none">{{ constructor.name }}</span>
+            <div class="flex items-center">
+                <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
+                <img class="pl-2 w-36 transform group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
+            </div>
+        </li>
+    {% endfor %}
+</ul>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Edit profile{% endblock %}
+
+{% block content %}
+<div class="space-y-4">
+    <div class="flex items-center gap-4">
+        <img class="rounded-full" src="https://ui-avatars.com/api/?name={{ current_user.first_name }}+{{ current_user.last_name }}&background=15141f&color=f6f5f2" alt="Profile picture">
+        <h1 class="text-2xl">Edit your profile</h1>
+    </div>
+
+    <form action="/profile" method="POST" class="grid grid-cols-2 gap-4">
+        {{ form.hidden_tag() }}
+
+        <div class="flex flex-col space-y-2">
+            <label for="first_name">First name</label>
+            {{ form.first_name(class="border rounded-md p-2") }}
+        </div>
+
+        <div class="flex flex-col space-y-2">
+            <label for="last_name">Last name</label>
+            {{ form.last_name(class="border rounded-md p-2") }}
+        </div>
+
+        <div class="flex flex-col space-y-2">
+            <label for="email">Email</label>
+            {{ form.email(class="border rounded-md p-2") }}
+        </div>
+
+
+        <div class="flex justify-end">
+            <button type="submit" class="bg-primary text-white rounded-md px-4 py-2">Save</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

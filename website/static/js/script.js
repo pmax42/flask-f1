@@ -12,6 +12,17 @@ function closeToast() {
     };
 }
 
+// Get class color
+window.getBgColorClassByConstructor = function(constructor){
+    return "bg-" + constructor;
+}
+window.getHoverTextClassByConstructor = function(constructor){
+    return "hover:text-" + constructor;
+}
+window.getHoverLiClassByConstructor = function(constructor){
+    return "hover:border-" + constructor + " " + "hover:shadow-" + constructor + "/25";
+}
+
 window.onload = () => {
     closeToast();
 }
