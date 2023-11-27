@@ -11,7 +11,12 @@ views = Blueprint('views', __name__)
 def home():
     # Query all constructors of 2023 season
     constructors = Constructor.query.filter(Constructor.color != None).all()
-    return render_template("home.html", user=current_user, constructors=constructors)
+    return render_template("home.html", constructors=constructors)
+
+@views.route('/standings')
+@login_required
+def standings():
+    return render_template("standings.html")
 
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required

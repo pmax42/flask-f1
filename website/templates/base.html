@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>My F1 - {% block title %}Home{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logos/logo.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
         <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
@@ -21,21 +22,30 @@
     </head>
 
     <body class="text-secondary bg-background font-custom">
-        <header class="flex items-center px-8 bg-primary">
-            <img class="w-32" src="{{ url_for('static', filename='images/f1-logo.png') }}" alt="My Formula One App">
+        <header class="flex items-center px-8 py-2 bg-primary select-none">
+            <img class="w-12" src="{{ url_for('static', filename='images/logos/logo.png') }}" alt="My Formula One App">
 
-            <nav class="w-full text-white text-lg">
-                <ul class="flex justify-evenly underline-offset-4" x-data="{ active: 'teams'}">
-                    <li @click="active = 'teams'; window.location.href='/';" :class="active == 'teams' ? 'underline' : ''" class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300">Teams</li>
-                    <li @click="active = 'drivers'; window.location.href='/drivers';" :class="active == 'drivers' ? 'underline' : ''" class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300">Drivers</li>
-                    <li @click="active = 'standings'; window.location.href='/standings';" :class="active == 'standings' ? 'underline' : ''" class="p-4 cursor-pointer hover:bg-secondary transition ease-in-out duration-300">Standings</li>
+            <nav class="w-full text-white text-sm">
+                <ul class="flex px-8 justify-end items-center gap-4" x-data="{ active: location.pathname.split('/').slice(1)[0] }">
+                    <li @click="active = ''; window.location.href='/';" :class="active == '' ? 'bg-secondary' : ''" class="h-fit rounded-lg flex gap-2 items-center px-4 py-2 cursor-pointer hover:bg-secondary transition ease-in-out duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                        <p>Home</p>
+                    </li>
+                    <li @click="active = 'standings'; window.location.href='/standings';" :class="active == 'standings' ? 'bg-secondary' : ''" class="h-fit rounded-lg flex gap-2 items-center px-4 py-2 cursor-pointer hover:bg-secondary transition ease-in-out duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                        </svg>
+                        <p>Standings</p>
+                    </li>
                 </ul>
             </nav>
 
             {% if current_user.is_authenticated %}
             <div x-data="{ show: false }" class="relative">
                 <img @click="show = !show" class="rounded-full w-12 cursor-pointer" src="https://ui-avatars.com/api/?name={{ current_user.first_name }}+{{ current_user.last_name }}&background=15141f&color=f6f5f2" alt="Profile picture">
-                <div x-show="show" x-cloak @click.outside="show = false" x-transition class="border absolute right-0 bg-white rounded-md text-sm shadow-md mt-1 w-[10rem]">
+                <div x-show="show" x-cloak @click.outside="show = false" x-transition class="z-10 border absolute right-0 bg-white rounded-md text-sm shadow-md mt-1 w-[10rem]">
                     <ul class="divide-y">
                         <li @click="window.location.href='/profile'" class="cursor-pointer flex items-center hover:text-primary gap-2 p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
@@ -86,12 +96,12 @@
             {% endwith %}
         </header>
         
-        <main class="p-8">
+        <main class="p-8 relative overflow-y-auto">
             {% block content %}{% endblock %}
         </main>
         
         <footer class="w-full bg-secondary text-white text-center p-6 text-xs flex items-center justify-between">
-            <img class="w-16" src="{{ url_for('static', filename='images/f1-logo.png') }}" alt="My Formula One App">
+            <img class="w-16" src="{{ url_for('static', filename='images/logos/f1-logo-red.png') }}" alt="My Formula One App">
             <p>&copy; 2023 My Formula One App. All rights reserved.</p>
         </footer>
     </body>

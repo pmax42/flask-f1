@@ -3,41 +3,45 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="ml-10">
-    <h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
-    <p class="text-xs italic mt-1">Click on a team for more information</p>
-</div>
-
-<ul x-data="{ 
-        active: '',
-        setActive(id) {
-            console.log(id);
-            this.active = (this.active == id) ? '' : id;
-        }
-    }" class="flex flex-col items-center py-8 gap-2">
-    {% for constructor in constructors %}
-        <li x-data="{
-                id: 'li-' + '{{ constructor.constructorRef }}',
-                liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}')
-            }"
-            class="w-1/2 bg-white rounded shadow border transition"
-            :class="liClass">
-            <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
-                <div class="flex items-center gap-4 select-none">
-                    <span x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass">{{ constructor.name }}</span>
-                    <div class="flex items-center">
-                        <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
-                        <img class="pl-2 w-36 transform transition group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
+<div class="flex items-start">
+    <div class="ml-6 sticky top-12">
+        <h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
+        <p class="text-xs italic mt-2">Click on a team for more information</p>
+    </div>
+    
+    <ul x-data="{ 
+            active: '',
+            setActive(id) {
+                if (!event.target.closest('a')) {
+                    console.log(id);
+                    this.active = (this.active == id) ? '' : id;
+                }
+            }
+        }" class="grow flex flex-col items-center gap-4">
+        {% for constructor in constructors %}
+            <li x-data="{
+                    id: 'li-' + '{{ constructor.constructorRef }}',
+                    liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}')
+                }"
+                class="w-2/3 bg-white rounded shadow border transition relative"
+                :class="liClass">
+                <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
+                    <div class="flex items-center gap-4 select-none">
+                        <a href="{{ constructor.url }}" target="_blank" x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass">{{ constructor.name }}</a>
+                        <div class="flex items-center">
+                            <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
+                            <img class="pl-2 w-36 transform transition group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
+                        </div>
                     </div>
-                </div>
-                <svg :class="{ 'rotate-180': active==id }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ease-in-out duration-200 group-hover:bg-gray-200 rounded-full p-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                </svg>
-            </header>
-            <main x-show="active==id" x-collapse x-cloak>
-                <div class="p-12">Card content</div>
-            </main>
-        </li>
-    {% endfor %}
+                    <svg :class="{ 'rotate-180': active==id }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ease-in-out duration-200 group-hover:bg-gray-200 rounded-full p-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </header>
+                <main x-show="active==id" x-collapse x-cloak>
+                    <div class="p-12">Card content</div>
+                </main>
+            </li>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
