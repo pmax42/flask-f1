@@ -22,8 +22,8 @@
     </head>
 
     <body class="text-secondary bg-background font-custom">
-        <header class="flex items-center px-8 py-2 bg-primary select-none">
-            <img class="w-12" src="{{ url_for('static', filename='images/logos/logo.png') }}" alt="My Formula One App">
+        <header class="flex items-center px-8 py-3 bg-primary select-none fixed w-full z-10 top-0">
+            <img class="w-24" src="{{ url_for('static', filename='images/logos/f1-logo-white.png') }}" alt="My Formula One App">
 
             <nav class="w-full text-white text-sm">
                 <ul class="flex px-8 justify-end items-center gap-4" x-data="{ active: location.pathname.split('/').slice(1)[0] }">
@@ -96,7 +96,7 @@
             {% endwith %}
         </header>
         
-        <main class="p-8 relative overflow-y-auto">
+        <main class="p-8 mt-16">
             {% block content %}{% endblock %}
         </main>
         

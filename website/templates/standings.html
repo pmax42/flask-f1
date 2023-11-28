@@ -3,5 +3,18 @@
 {% block title %}Standings{% endblock %}
 
 {% block content %}
-Coucou
+<div x-data="{ activeTab: 'drivers' }" class="border rounded-lg">
+    <ul class="text-gray-400 uppercase flex bg-secondary rounded-t-lg text-center cursor-pointer">
+        <li @click="activeTab = 'drivers'" :class="activeTab == 'drivers' ? 'text-white border-b-2' : ''" class="w-full p-4 hover:text-white">Drivers</li>
+        <li @click="activeTab = 'constructors'" :class="activeTab == 'constructors' ? 'text-white border-b-2' : ''" class="w-full p-4 hover:text-white">Constructors</li>
+    </ul>
+    <div x-show="activeTab == 'drivers'">
+        <p>2023 Standings</p>
+        <table></table>
+    </div>
+    <div x-show="activeTab == 'constructors'">
+        <p>2023 Standings</p>
+        <table></table>
+    </div>
+</div>
 {% endblock %}

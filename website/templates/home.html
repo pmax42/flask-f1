@@ -3,10 +3,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="flex items-start">
-    <div class="ml-6 sticky top-12">
-        <h1 class="text-3xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
-        <p class="text-xs italic mt-2">Click on a team for more information</p>
+<div class="grid grid-cols-4 items-start">
+    <div class="sticky top-20 justify-self-end mt-10">
+        <h1 class="text-4xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
+        <p class="text-xs mt-2 text-gray-700">Click on a team for more information</p>
     </div>
     
     <ul x-data="{ 
@@ -17,7 +17,7 @@
                     this.active = (this.active == id) ? '' : id;
                 }
             }
-        }" class="grow flex flex-col items-center gap-4">
+        }" class="grow flex flex-col items-center gap-4 col-span-3">
         {% for constructor in constructors %}
             <li x-data="{
                     id: 'li-' + '{{ constructor.constructorRef }}',

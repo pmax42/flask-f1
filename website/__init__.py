@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 import os
 from flask_login import LoginManager
 from .helpers import snake_case
+# from .tables import test_get_data
 
 load_dotenv()
 
@@ -38,6 +39,7 @@ def create_app():
     from .models import User
 
     init_db(app)
+    # test_get_data(db) # TODO - Remove this
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
