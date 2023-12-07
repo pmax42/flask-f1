@@ -50,7 +50,7 @@ SET country_iso = CASE
     WHEN nationality = 'Chinese' THEN 'cn'
     WHEN nationality = 'Thai' THEN 'th'
 END,
-SET constructor_id = CASE
+constructor_id = CASE
     WHEN driverRef IN ('hamilton', 'russell') THEN (SELECT constructorId FROM constructors WHERE constructorRef = 'mercedes')
     WHEN driverRef IN ('verstappen', 'perez') THEN (SELECT constructorId FROM constructors WHERE constructorRef = 'red_bull')
     WHEN driverRef IN ('leclerc', 'sainz') THEN (SELECT constructorId FROM constructors WHERE constructorRef = 'ferrari')
@@ -66,7 +66,7 @@ END;
 -- Add data to constructors
 UPDATE constructors
 SET image_url = CONCAT('images/cars/', constructorRef, '.avif'),
-SET color = CASE
+color = CASE
     WHEN constructorRef = 'mclaren' THEN '#F58020'
     WHEN constructorRef = 'mercedes' THEN '#6CD3BF'
     WHEN constructorRef = 'red_bull' THEN '#3671C6'
@@ -78,7 +78,7 @@ SET color = CASE
     WHEN constructorRef = 'aston_martin' THEN '#358C75'
     WHEN constructorRef = 'alfa' THEN '#C92D4B'
 END,
-SET foundation_year = CASE
+foundation_year = CASE
     WHEN constructorRef = 'mclaren' THEN 1963
     WHEN constructorRef = 'mercedes' THEN 1954
     WHEN constructorRef = 'red_bull' THEN 2005
@@ -90,7 +90,7 @@ SET foundation_year = CASE
     WHEN constructorRef = 'aston_martin' THEN 1991
     WHEN constructorRef = 'alfa' THEN 1950
 END,
-SET team_director = CASE
+team_director = CASE
     WHEN constructorRef = 'mclaren' THEN 'Andreas Seidl'
     WHEN constructorRef = 'mercedes' THEN 'Toto Wolff'
     WHEN constructorRef = 'red_bull' THEN 'Christian Horner'
@@ -102,7 +102,7 @@ SET team_director = CASE
     WHEN constructorRef = 'aston_martin' THEN 'Otmar Szafnauer'
     WHEN constructorRef = 'alfa' THEN 'Frederic Vasseur'
 END,
-SET wikipedia_page = CASE
+wikipedia_page = CASE
     WHEN constructorRef = 'mclaren' THEN 'https://en.wikipedia.org/wiki/McLaren'
     WHEN constructorRef = 'mercedes' THEN 'https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One'
     WHEN constructorRef = 'red_bull' THEN 'https://en.wikipedia.org/wiki/Red_Bull_Racing'
@@ -114,8 +114,8 @@ SET wikipedia_page = CASE
     WHEN constructorRef = 'aston_martin' THEN 'https://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One'
     WHEN constructorRef = 'alfa' THEN 'https://en.wikipedia.org/wiki/Alfa_Romeo_Racing'
 END,
-SET logo = CONCAT('images/logos/', constructorRef, '.png'),
-SET country = CASE
+logo = CONCAT('images/logos/', constructorRef, '.png'),
+country = CASE
     WHEN constructorRef = 'mclaren' THEN 'United Kingdom'
     WHEN constructorRef = 'mercedes' THEN 'Germany'
     WHEN constructorRef = 'red_bull' THEN 'Austria'
@@ -127,7 +127,7 @@ SET country = CASE
     WHEN constructorRef = 'aston_martin' THEN 'United Kingdom'
     WHEN constructorRef = 'alfa' THEN 'Switzerland'
 END,
-SET country_iso = CASE
+country_iso = CASE
     WHEN constructorRef = 'mclaren' THEN 'gb'
     WHEN constructorRef = 'mercedes' THEN 'de'
     WHEN constructorRef = 'red_bull' THEN 'at'
@@ -139,7 +139,7 @@ SET country_iso = CASE
     WHEN constructorRef = 'aston_martin' THEN 'gb'
     WHEN constructorRef = 'alfa' THEN 'ch'
 END,
-SET championships_won = CASE
+championships_won = CASE
     WHEN constructorRef = 'mclaren' THEN 8
     WHEN constructorRef = 'mercedes' THEN 7
     WHEN constructorRef = 'red_bull' THEN 4
