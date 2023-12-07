@@ -5,24 +5,28 @@
 {% block title %}Edit profile{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl mb-2 ml-4">Edit your <span class="text-primary">profile</span></h1>
-<div class="space-y-4 flex justify-center items-center gap-x-48">
-    <div class="flex flex-col items-center gap-4">
-        <img class="rounded-full w-32" src="https://ui-avatars.com/api/?name={{ current_user.first_name }}+{{ current_user.last_name }}&background=15141f&color=f6f5f2" alt="Profile picture">
-        <span>{{ current_user.first_name }} {{ current_user.last_name }}</span>
-    </div>
-
-    <form action="/profile" method="POST" class="grid grid-cols-2 gap-4 w-1/2 lg:w-2/3" novalidate>
-        {{ form.hidden_tag() }}
-
-        {{ textInput("First name", form) }}
-        {{ textInput("Last name", form) }}
-        {{ textInput("Email", form) }}
-        {{ textInput("Phone number", form)  }}
-
-        <div class="flex justify-end col-span-2">
-            <button type="submit" class="bg-primary text-white rounded-md px-4 py-2 hover:bg-red-700 transition focus:ring-2 ring-primary">Save</button>
+<div class="px-8">
+    <h1 class="mx-auto lg:mx-0 w-fit text-2xl mb-4">
+        Edit your <span class="text-primary">profile</span>
+    </h1>
+    <div class="flex flex-col lg:flex-row justify-between items-center">
+        <div class="flex flex-col items-center gap-4 mb-4 lg:mb-0">
+            <img class="rounded-full w-32" src="https://ui-avatars.com/api/?name={{ current_user.first_name }}+{{ current_user.last_name }}&background=15141f&color=f6f5f2" alt="Profile picture">
+            <span>{{ current_user.first_name }} {{ current_user.last_name }}</span>
         </div>
-    </form>
+    
+        <form action="/profile" method="POST" class="lg:grid lg:grid-cols-2 flex flex-col gap-4 w-full lg:w-3/4" novalidate>
+            {{ form.hidden_tag() }}
+    
+            {{ textInput("First name", form) }}
+            {{ textInput("Last name", form) }}
+            {{ textInput("Email", form) }}
+            {{ textInput("Phone number", form)  }}
+    
+            <div class="flex justify-end col-span-2">
+                <button type="submit" class="bg-primary text-white rounded-md px-4 py-2 hover:bg-red-700 transition focus:ring-2 ring-primary">Save</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

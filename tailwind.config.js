@@ -2,6 +2,15 @@
 module.exports = {
   content: ["./website/templates/*"],
   safelist: [
+    // Classes for tables (standings page)
+    "w-full",
+    "text-center",
+    "border-t",
+    "hover:bg-gray-100",
+    "py-2",
+    "text-left",
+
+    // Classes for team cards (home page)
     "bg-mercedes",
     "bg-ferrari",
     "bg-red_bull",

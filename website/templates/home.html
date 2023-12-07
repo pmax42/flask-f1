@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="grid grid-cols-4 items-start">
-    <div class="sticky top-20 justify-self-end mt-10">
+    <div class="lg:sticky lg:top-20 justify-start lg:justify-self-end lg:mt-10 mb-10 lg:col-span-1 col-span-4">
         <h1 class="text-4xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
         <p class="text-xs mt-2 text-gray-700">Click on a team for more information</p>
     </div>
@@ -17,13 +17,13 @@
                     this.active = (this.active == id) ? '' : id;
                 }
             }
-        }" class="grow flex flex-col items-center gap-4 col-span-3">
+        }" class="grow flex flex-col items-center gap-4 col-span-4 lg:col-span-3">
         {% for constructor in constructors %}
             <li x-data="{
                     id: 'li-' + '{{ constructor.constructorRef }}',
                     liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}')
                 }"
-                class="w-2/3 bg-white rounded shadow border transition relative"
+                class="w-full lg:w-2/3 bg-white rounded shadow border transition relative"
                 :class="liClass">
                 <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
                     <div class="flex items-center gap-4 select-none">

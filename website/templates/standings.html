@@ -3,18 +3,36 @@
 {% block title %}Standings{% endblock %}
 
 {% block content %}
-<div x-data="{ activeTab: 'drivers' }" class="border rounded-lg">
+<div x-data="{ activeTab: 'drivers' }" class="border rounded-lg bg-white">
     <ul class="text-gray-400 uppercase flex bg-secondary rounded-t-lg text-center cursor-pointer">
-        <li @click="activeTab = 'drivers'" :class="activeTab == 'drivers' ? 'text-white border-b-2' : ''" class="w-full p-4 hover:text-white">Drivers</li>
-        <li @click="activeTab = 'constructors'" :class="activeTab == 'constructors' ? 'text-white border-b-2' : ''" class="w-full p-4 hover:text-white">Constructors</li>
+        <li @click="activeTab = 'drivers'" :class="activeTab == 'drivers' ? 'text-white border-b-2 border-primary' : ''" class="w-full p-4 hover:text-white">Drivers</li>
+        <li @click="activeTab = 'constructors'" :class="activeTab == 'constructors' ? 'text-white border-b-2 border-primary' : ''" class="w-full p-4 hover:text-white">Constructors</li>
     </ul>
-    <div x-show="activeTab == 'drivers'">
-        <p>2023 Standings</p>
-        <table></table>
+    <div x-show="activeTab == 'drivers'" class="p-4">
+        <p class="text-xl mb-4 text-primary">2023 Standings</p>
+        {{ driversTable }}
     </div>
-    <div x-show="activeTab == 'constructors'">
-        <p>2023 Standings</p>
-        <table></table>
+    <div x-show="activeTab == 'constructors'" class="p-4">
+        <p class="text-xl mb-4 text-primary">2023 Standings</p>
+        {{ constructorsTable }}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Get second col of each table row
+    const tableRows = document.querySelectorAll('tr.driverStandingRow');
+    tableRows.forEach(row => {
+        // Return if first element is th instead of td
+        if (row.firstElementChild.tagName === 'TH') return;
+        const driverCol = row.children[1];
+        driverCol.classList.add('flex', 'items-center', 'gap-2');
+        // Add img element
+        const img = document.createElement('img');
+        img.src = "https://flagsapi.com/BE/flat/32.png";
+        img.alt = "Flag";
+        driverCol.prepend(img);
+    });
+</script>
 {% endblock %}

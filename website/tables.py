@@ -1,49 +1,40 @@
-from flask_table import Table, Col, LinkCol
+from flask_table import Table, Col
+from sqlalchemy import text
+from .queries import query_driver_standings, query_constructor_standings
+from . import db
 
 class DriverStandings(Table):
-    rank = Col('Rank')
-    driver = Col('Driver')
-    points = Col('Points')
-    wins = Col('Wins')
-    podiums = Col('Podiums')
+    classes = ['w-full', 'text-center']
+    rank = Col('Rank', column_html_attrs={'class': 'py-2'})
+    driver = Col('Driver', column_html_attrs={'class': 'text-left py-2'})
+    points = Col('Points', column_html_attrs={'class': 'py-2'})
+    wins = Col('Wins', column_html_attrs={'class': 'py-2'})
+    podiums = Col('Podiums', column_html_attrs={'class': 'py-2'})
 
-class DriverStanding(object):
-    def __init__(self, rank, driver, points, wins, podiums):
-        self.rank = rank
-        self.driver = driver
-        self.points = points
-        self.wins = wins
-        self.podiums = podiums
+    def get_tr_attrs(self, item):
+        return {'class': 'driverStandingRow border-t hover:bg-gray-100'}
 
-query = """
-WITH podiumsCTE AS (
-	SELECT res.driverId,
-       COUNT(CASE WHEN position = 1 THEN 1 END) as first_place_count,
-       COUNT(CASE WHEN position = 2 THEN 1 END) as second_place_count,
-       COUNT(CASE WHEN position = 3 THEN 1 END) as third_place_count
-	FROM results res
-	INNER JOIN races ra ON ra.raceId = res.raceId
-    INNER JOIN drivers d ON d.driverId = res.driverId
-    WHERE ra.year = 2023
-	GROUP BY res.driverId
-)
-SELECT
-    CONCAT(d.forename, ' ', d.surname) AS 'Driver',
-    MAX(ds.points) AS 'Points',
-    MAX(ds.wins) AS 'Wins',
-    (p.first_place_count + p.second_place_count + p.third_place_count) AS 'Podiums'
-FROM driverStandings ds
-INNER JOIN podiumsCTE p ON p.driverId = ds.driverId
-INNER JOIN drivers d ON d.driverId = ds.driverId
-INNER JOIN races r ON r.raceId = ds.raceId
-WHERE r.year = 2023
-GROUP BY d.driverId
-ORDER BY 2 DESC, 4 DESC;
-"""
+class ConstructorStandings(Table):
+    classes = ['w-full', 'text-center']
+    rank = Col('Rank', column_html_attrs={'class': 'py-2'})
+    constructor = Col('Constructor', column_html_attrs={'class': 'text-left py-2'})
+    points = Col('Points', column_html_attrs={'class': 'py-2'})
+    wins = Col('Wins', column_html_attrs={'class': 'py-2'})
+    podiums = Col('Podiums', column_html_attrs={'class': 'py-2'})
 
-def test_get_data(db):
-    standings = db.engine.execute(query)
+    def get_tr_attrs(self, item):
+        return {'class': 'constructorStandingRow border-t hover:bg-gray-100'}
+
+def getDriversTable():
+    standings = db.session.execute(text(query_driver_standings))
     driver_standings = []
     for standing in standings:
-        driver_standings.append(DriverStanding(standing[0], standing[1], standing[2], standing[3], standing[4]))
-    print(driver_standings)
+        driver_standings.append(standing)
+    return DriverStandings(driver_standings)
+
+def getConstructorsTable():
+    standings = db.session.execute(text(query_constructor_standings))
+    constructor_standings = []
+    for standing in standings:
+        constructor_standings.append(standing)
+    return ConstructorStandings(constructor_standings)
