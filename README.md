@@ -1,4 +1,4 @@
-# Web Project
+# Web Project - My Formula One©
 
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-2.3.1-green)](https://flask.palletsprojects.com/en/2.0.x/)
