@@ -20,10 +20,15 @@ class Constructor(db.Model):
     constructorId = db.Column(db.Integer, primary_key=True)
     constructorRef = db.Column(db.String(255))
     name = db.Column(db.String(255))
-    color = db.Column(db.String(7))
-    image_url = db.Column(db.String(255))
     nationality = db.Column(db.String(255))
     url = db.Column(db.String(255))
+    color = db.Column(db.String(7))
+    image_url = db.Column(db.String(255))
+    foundation_year = db.Column(db.Integer)
+    team_director = db.Column(db.String(255))
+    logo = db.Column(db.String(255))
+    country_iso = db.Column(db.String(3))
+    championships_won = db.Column(db.Integer)
     drivers = db.relationship('Driver', backref='constructor')
 
 class User(db.Model, UserMixin):

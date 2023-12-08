@@ -16,19 +16,26 @@ def login():
     form = LoginForm(request.form)
 
     if request.method == 'POST':
-        email = request.form.get('email')
-        password = request.form.get('password')
+        if form.validate_on_submit():
+            email = request.form.get('email').lower()
+            password = request.form.get('password')
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash("Logged in successfully", category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+            # Check if user exists
+            user = User.query.filter_by(email=email).first()
+            if user:
+                if check_password_hash(user.password, password):
+                    flash("Logged in successfully", category='success')
+                    login_user(user, remember=True)
+                    return redirect(url_for('views.home'))
+                else:
+                    flash("Incorrect password", category='error')
             else:
-                flash("Incorrect password", category='error')
+                flash("Email does not exist", category='error')
         else:
-            flash("Email does not exist", category='error')
+            key, message_list = list(form.errors.items())[0]
+            message = message_list[0]
+            flash(snake_to_normal(key) + ': ' + message, category='error')
+
     return render_template("login.html", form=form)
 
 @auth.route('/logout')
@@ -60,6 +67,7 @@ def sign_up():
                 last_name=lastName, 
                 password=generate_password_hash(password)
             )
+
             db.session.add(new_user)
             db.session.commit()
             flash("Account created", category='success')

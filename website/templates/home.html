@@ -13,7 +13,6 @@
             active: '',
             setActive(id) {
                 if (!event.target.closest('a')) {
-                    console.log(id);
                     this.active = (this.active == id) ? '' : id;
                 }
             }
@@ -21,15 +20,18 @@
         {% for constructor in constructors %}
             <li x-data="{
                     id: 'li-' + '{{ constructor.constructorRef }}',
-                    liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}')
+                    liClass: window.getHoverLiClassByConstructor('{{ constructor.constructorRef }}'),
+                    hoverTextClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}'),
+                    textClass: window.getTextClassByConstructor('{{ constructor.constructorRef }}'),
+                    bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}')
                 }"
                 class="w-full lg:w-2/3 bg-white rounded shadow border transition relative"
                 :class="liClass">
                 <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
                     <div class="flex items-center gap-4 select-none">
-                        <a href="{{ constructor.url }}" target="_blank" x-data="{ textClass: window.getHoverTextClassByConstructor('{{ constructor.constructorRef }}') }" :class="textClass">{{ constructor.name }}</a>
+                        <a href="{{ constructor.url }}" target="_blank" :class="hoverTextClass">{{ constructor.name }}</a>
                         <div class="flex items-center">
-                            <span x-data="{ bgClass: window.getBgColorClassByConstructor('{{ constructor.constructorRef }}') }" :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
+                            <span :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
                             <img class="pl-2 w-36 transform transition group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
                         </div>
                     </div>
@@ -38,7 +40,35 @@
                     </svg>
                 </header>
                 <main x-show="active==id" x-collapse x-cloak>
-                    <div class="p-12">Card content</div>
+                    <div class="px-8 pb-6 py-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="lg:col-span-2 bg-gray-50 rounded-lg flex items-center justify-around py-2 border mb-2">
+                            {% for driver in constructor.drivers %}
+                                <a class="flex items-center gap-1" :class="hoverTextClass" href="{{ driver.url }}" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-helmet" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4a9 9 0 0 1 5.656 16h-11.312a9 9 0 0 1 5.656 -16z" />
+                                        <path d="M20 9h-8.8a1 1 0 0 0 -.968 1.246c.507 2 1.596 3.418 3.268 4.254c2 1 4.333 1.5 7 1.5" />
+                                    </svg>
+                                    <span>{{ driver.forename }} {{ driver.surname }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="flex items-center">
+                            <h3 class="mr-2">First entry:</h3>
+                            <span :class="textClass">{{ constructor.foundation_year }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <h3 class="mr-2">Team director:</h3>
+                            <span :class="textClass">{{ constructor.team_director }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <h3 class="mr-2">Nationality:</h3>
+                            <img class="h-4 mr-1" src="https://flagcdn.com/w80/{{ constructor.country_iso }}.png" alt="Country flag">
+                            <span :class="textClass">{{ constructor.nationality }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <h3 class="mr-2">Championships:</h3>
+                            <span :class="textClass">{{ constructor.championships_won }}</span>
+                        </div>
+                    </div>
                 </main>
             </li>
         {% endfor %}

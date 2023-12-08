@@ -51,6 +51,16 @@ module.exports = {
     "hover:shadow-haas/25",
     "hover:shadow-alphatauri/25",
     "hover:shadow-williams/25",
+    "text-mercedes",
+    "text-ferrari",
+    "text-red_bull",
+    "text-mclaren",
+    "text-aston_martin",
+    "text-alpine",
+    "text-alfa",
+    "text-haas",
+    "text-alphatauri",
+    "text-williams",
   ],
   theme: {
     extend: {

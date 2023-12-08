@@ -26,8 +26,6 @@ def standings():
 def profile():
     form = UpdateAccountForm(request.form)
 
-    print(current_user.phone_number)
-
     # Populate form with current user data
     if request.method == 'GET':
         form.first_name.data = current_user.first_name

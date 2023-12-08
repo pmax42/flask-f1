@@ -5,13 +5,13 @@ from flask_login import current_user
 from .models import User
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=30)])
-    last_name = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=30)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    phone_number = StringField('Phone Number', validators=[Length(min=10, max=10), Optional()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=30)], render_kw={"placeholder": "Lewis"})
+    last_name = StringField('Last Name', validators=[DataRequired(), Length(min=2, max=30)], render_kw={"placeholder": "Hamilton"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "name@gmail.com"})
+    phone_number = StringField('Phone Number', validators=[Length(min=10, max=10), Optional()], render_kw={"placeholder": "0612345678"})
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)], render_kw={"placeholder": "••••••"})
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder": "••••••"})
+    submit = SubmitField('Create an account')
 
     # Custom validation for email
     def validate_email(self, email):
@@ -28,7 +28,7 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "name@gmail.com"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "••••••"})
-    submit = SubmitField('Login')
+    submit = SubmitField('Sign in')
 
 class UpdateAccountForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired(), Length(min=2, max=30)])

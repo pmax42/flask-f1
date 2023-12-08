@@ -28,4 +28,16 @@ Welcome to this web application built with Python (Flask) and HTML/CSS, leveragi
 
 ## Informations
 
+- Some data may be outdated (auto-generated)
 - Flask 2.3.1 is used to fit with flask_table (deprecated since higher versions of Flask)
+
+## Roadmap
+
+- Refactor and clean up the code
+- Add flags in driver standings
+- Add logos in constructor files
+- Add transitions on toasts
+- Create a docker-compose to set up the entire development environment
+- Position the footer at the bottom of the page when there is no scroll
+- Restrict max page resizing in width to 550px
+- Production state for the app (build)

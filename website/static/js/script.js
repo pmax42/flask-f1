@@ -22,6 +22,9 @@ window.getHoverTextClassByConstructor = function(constructor){
 window.getHoverLiClassByConstructor = function(constructor){
     return "hover:border-" + constructor + " " + "hover:shadow-" + constructor + "/25";
 }
+window.getTextClassByConstructor = function(constructor){
+    return "text-" + constructor;
+}
 
 window.onload = () => {
     closeToast();

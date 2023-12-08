@@ -18,21 +18,3 @@
     </div>
 </div>
 {% endblock %}
-
-{% block scripts %}
-<script>
-    // Get second col of each table row
-    const tableRows = document.querySelectorAll('tr.driverStandingRow');
-    tableRows.forEach(row => {
-        // Return if first element is th instead of td
-        if (row.firstElementChild.tagName === 'TH') return;
-        const driverCol = row.children[1];
-        driverCol.classList.add('flex', 'items-center', 'gap-2');
-        // Add img element
-        const img = document.createElement('img');
-        img.src = "https://flagsapi.com/BE/flat/32.png";
-        img.alt = "Flag";
-        driverCol.prepend(img);
-    });
-</script>
-{% endblock %}

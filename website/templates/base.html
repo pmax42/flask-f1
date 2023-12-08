@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>My F1 - {% block title %}Home{% endblock %}</title>
-        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/logos/logo.png') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icons/favicon.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
         <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
@@ -23,7 +23,7 @@
 
     <body class="text-secondary bg-background font-custom">
         <header class="flex items-center px-8 py-3 bg-primary select-none fixed w-full z-10 top-0">
-            <img class="w-24" src="{{ url_for('static', filename='images/logos/f1-logo-white.png') }}" alt="My Formula One App">
+            <img class="w-24" src="{{ url_for('static', filename='images/icons/f1-logo-white.png') }}" alt="My Formula One App">
 
             <nav class="w-full text-white text-sm">
                 <ul class="flex px-8 justify-end items-center gap-4" x-data="{ active: location.pathname.split('/').slice(1)[0] }">
@@ -69,7 +69,7 @@
                 {% for category, message in messages %}
                     <div class="toast fixed flex items-center justify-between w-full max-w-xs p-4 space-x-4 text-gray-600 bg-white rounded-lg shadow top-5 right-5" role="alert">
                         {% if category == 'success' %}
-                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
                                 </svg>
@@ -101,7 +101,7 @@
         </main>
         
         <footer class="w-full bg-secondary text-white text-center p-6 text-xs flex items-center justify-between">
-            <img class="w-16" src="{{ url_for('static', filename='images/logos/f1-logo-red.png') }}" alt="My Formula One App">
+            <img class="w-16" src="{{ url_for('static', filename='images/icons/f1-logo-red.png') }}" alt="My Formula One App">
             <p>&copy; 2023 My Formula One App. All rights reserved.</p>
         </footer>
 
