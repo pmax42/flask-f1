@@ -5,17 +5,20 @@
 {% block content %}
 <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 mx-auto lg:max-w-5xl">
     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-            Create and account
-        </h1>
+        <div>
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                Create and account
+            </h1>
+            <p class="text-primary text-xs">* required fields</p>
+        </div>
         <form action="/sign-up" method="post" class="space-y-4 md:space-y-6 lg:grid lg:grid-cols-2 lg:gap-x-4" novalidate>
             {{ form.hidden_tag() }}
             <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First Name<span class="text-primary">*</span></label>
                 {{ form.first_name(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last Name<span class="text-primary">*</span></label>
                 {{ form.last_name(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <div>
@@ -23,15 +26,15 @@
                 {{ form.phone_number(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email<span class="text-primary">*</span></label>
                 {{ form.email(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password<span class="text-primary">*</span></label>
                 {{ form.password(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <div>
-                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
+                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm password<span class="text-primary">*</span></label>
                 {{ form.confirm_password(class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 focus:outline-none") }}
             </div>
             <!-- <div class="flex items-start">
