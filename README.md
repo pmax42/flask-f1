@@ -33,11 +33,10 @@ Welcome to this web application built with Python (Flask) and HTML/CSS, leveragi
 
 ## Roadmap
 
-- Refactor and clean up the code
+- Refactor, comment and clean up the code
 - Add flags in driver standings
 - Add logos in constructor files
 - Add transitions on toasts
 - Create a docker-compose to set up the entire development environment
-- Position the footer at the bottom of the page when there is no scroll
-- Restrict max page resizing in width to 550px
+- Restrict max page resizing in width to 300px
 - Production state for the app (build)

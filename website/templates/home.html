@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="grid grid-cols-4 items-start">
-    <div class="lg:sticky lg:top-20 justify-start lg:justify-self-end lg:mt-10 mb-10 lg:col-span-1 col-span-4">
-        <h1 class="text-4xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
+    <div class="lg:sticky lg:top-20 justify-start lg:justify-self-end lg:mt-10 mb-6 sm:mb-8 lg:col-span-1 col-span-4">
+        <h1 class="text-3xl sm:text-4xl">Hi, <span class="text-primary">{{ current_user.first_name }}</span>!</h1>
         <p class="text-xs mt-2 text-gray-700">Click on a team for more information</p>
     </div>
     
@@ -27,10 +27,10 @@
                 }"
                 class="w-full lg:w-2/3 bg-white rounded shadow border transition relative"
                 :class="liClass">
-                <header @click="setActive(id)" class="flex items-center justify-between cursor-pointer group py-4 px-6">
+                <header @click="setActive(id)" class="text-sm sm:text-base flex items-center justify-between cursor-pointer group py-4 px-6">
                     <div class="flex items-center gap-4 select-none">
                         <a href="{{ constructor.url }}" target="_blank" :class="hoverTextClass">{{ constructor.name }}</a>
-                        <div class="flex items-center">
+                        <div class="items-center hidden sm:flex">
                             <span :class="bgClass" class="w-6 h-4 absolute group-hover:w-28 group-hover:skew-x-12 transform transition-all delay-50"></span>
                             <img class="pl-2 w-36 transform transition group-hover:translate-x-20 ease-in-out duration-300" src="{{ url_for('static', filename=constructor.image_url) }}" alt="Car image">
                         </div>
@@ -39,9 +39,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
                 </header>
-                <main x-show="active==id" x-collapse x-cloak>
+                <main class="text-sm sm:text-base" x-show="active==id" x-collapse x-cloak>
                     <div class="px-8 pb-6 py-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div class="lg:col-span-2 bg-gray-50 rounded-lg flex items-center justify-around py-2 border mb-2">
+                        <div class="lg:col-span-2 bg-gray-50 rounded-lg flex flex-col sm:flex-row items-center justify-around py-2 border mb-2 gap-2">
                             {% for driver in constructor.drivers %}
                                 <a class="flex items-center gap-1" :class="hoverTextClass" href="{{ driver.url }}" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-helmet" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4a9 9 0 0 1 5.656 16h-11.312a9 9 0 0 1 5.656 -16z" />

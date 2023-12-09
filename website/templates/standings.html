@@ -3,18 +3,15 @@
 {% block title %}Standings{% endblock %}
 
 {% block content %}
-<div x-data="{ activeTab: 'drivers' }" class="border rounded-lg bg-white">
+<div x-data="{ activeTab: 'drivers' }" class="overflow-hidden border rounded-lg bg-white text-xs sm:text-base">
     <ul class="text-gray-400 uppercase flex bg-secondary rounded-t-lg text-center cursor-pointer">
-        <li @click="activeTab = 'drivers'" :class="activeTab == 'drivers' ? 'text-white border-b-2 border-primary' : ''" class="w-full p-4 hover:text-white">Drivers</li>
-        <li @click="activeTab = 'constructors'" :class="activeTab == 'constructors' ? 'text-white border-b-2 border-primary' : ''" class="w-full p-4 hover:text-white">Constructors</li>
+        <li @click="activeTab = 'drivers'" :class="activeTab == 'drivers' ? 'text-white border-b-2 border-primary' : ''" class="w-full px-2 py-4 sm:px-4 hover:text-white">Drivers</li>
+        <li @click="activeTab = 'constructors'" :class="activeTab == 'constructors' ? 'text-white border-b-2 border-primary' : ''" class="w-full px-2 py-4 sm:px-4 hover:text-white">Constructors</li>
     </ul>
-    <div x-show="activeTab == 'drivers'" class="p-4">
-        <p class="text-xl mb-4 text-primary">2023 Standings</p>
-        {{ driversTable }}
-    </div>
-    <div x-show="activeTab == 'constructors'" class="p-4">
-        <p class="text-xl mb-4 text-primary">2023 Standings</p>
-        {{ constructorsTable }}
+    <div class="p-4">
+        <p class="text-base sm:text-xl mb-4 text-primary">2023 Standings</p>
+        <div class="overflow-x-auto" x-show="activeTab == 'drivers'">{{ driversTable }}</div>
+        <div class="overflow-x-auto" x-show="activeTab == 'constructors'">{{ constructorsTable }}</div>
     </div>
 </div>
 {% endblock %}
